@@ -392,7 +392,7 @@ def Jarvis_about_callback(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(text="🎧destek grubu🎧", callback_data="kumsalmuzikk"),
-                        InlineKeyboardButton(text="🌹sahibi🌹, url=f"tg://user?id={OWNER_ID}"),
+                        InlineKeyboardButton(text="🌹sahibi🌹", url=f"tg://user?id={OWNER_ID}"),
                     ],
                     [
                         
