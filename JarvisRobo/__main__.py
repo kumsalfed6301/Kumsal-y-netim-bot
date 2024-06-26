@@ -400,10 +400,10 @@ def Jarvis_about_callback(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(text="๏ geri๏", callback_data="Jarvis_back"),
-                    ], 
-                    [
+                    ],
+                ]
             ),
-        )
+        ) 
     elif query.data == "Jarvis_support":
         query.message.edit_caption("๏ Yardım ve daha fazla bilgi almak için aşağıda verilen düğmelere tıklayın"
             f"\n\nformlar spatcher.bot.first_name} hakkında geri bildirimde bulunmak istiyorsanız {dispatcher.bot.first_name}, kafanız karıştıysa destek grubuna yazın.",
