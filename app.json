@@ -22,12 +22,12 @@
         "API_ID": {
             "description": "Get this value from my.telegram.org/apps.",
             "required": true,
-            "value": ""
+            "value": "20584104"
         },
         "API_HASH": {
             "description": "Get this value from my.telegram.org/apps.",
             "required": true,
-            "value": ""
+            "value": "f325ee578444d70ad2d02b0673f94d3a"
         },
         "ALLOW_EXCL": {
             "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
@@ -45,12 +45,12 @@
         "EVENT_LOGS": {
             "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
             "required": true,
-            "value": ""
+            "value": "-1002055441598"
         },
         "MONGO_DB_URI": {
             "description": "Required for database connections.",
             "required": true,
-            "value": ""
+            "value": "mongodb+srv://kurt67143:nays@cluster0.vjg7bma.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
         },
         "CASH_API_KEY": {
             "description": "Get your API key from https://www.alphavantage.co/support/#api-key",
@@ -65,27 +65,27 @@
         "OWNER_ID": {
             "description": "Your user ID as an integer.",
             "required": true,
-            "value": ""
+            "value": "6387858072"
         },
         "START_IMG": {
             "description": "Telegraph link of the image which will be shown at start command.",
             "required": true,
-            "value": ""
+            "value": "https://telegra.ph/Guzel-03-30"
         },
         "HELP_IMG": {
             "description": "Telegraph link of the image which will be shown at help command.",
             "required": true,
-            "value": ""
+            "value": "https://telegra.ph/httptelegraph55-03-30-15-04-09"
         },
         "SUPPORT_CHAT": {
             "description": "Your Telegram support group chat username where your users will go and bother you with shit Example - The_support_chat.",
             "required": true,
-            "value": ""
+            "value": "kumsalmuzik"
         },
         "TOKEN": {
             "description": "Get bot token from @BotFather on TG",
             "required": true,
-            "value": ""
+            "value": "7370458760:AAEbNYoZBV1B62ef29dT0rrcWAr1vFvj7JI"
         }
     }
 }
