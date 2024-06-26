@@ -415,7 +415,7 @@ def Jarvis_about_callback(update: Update, context: CallbackContext):
                             text="🍷destek grubu🍷", url=f"https://t.me/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="🍷destek Kanalı🍷", url=f"https://t.me/JARVIS_V_SUPPORT"
+                            text="🍷destek Kanalı🍷", url=f"https://t.me/kumsaldestekkanal"
                         ),
                     ],
                     [
