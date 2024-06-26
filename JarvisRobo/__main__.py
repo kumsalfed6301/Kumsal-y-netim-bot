@@ -406,7 +406,7 @@ def Jarvis_about_callback(update: Update, context: CallbackContext):
         ) 
     elif query.data == "Jarvis_support":
         query.message.edit_caption("๏ Yardım ve daha fazla bilgi almak için aşağıda verilen düğmelere tıklayın"
-            f"\n\nɪғ ʏᴏᴜ ғᴏᴜɴᴅ ᴀɴʏ ʙᴜɢ ɪɴ {dispatcher.bot.first_name} ᴏʀ ɪғ ʏᴏᴜ ᴡᴀɴɴᴀ ɢɪᴠᴇ ғᴇᴇᴅʙᴀᴄᴋ ᴀʙᴏᴜᴛ ᴛʜᴇ {dispatcher.bot.first_name}, ᴩʟᴇᴀsᴇ ʀᴇᴩᴏʀᴛ ɪᴛ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ.",
+            f"\n\n formatlar {dispatcher.bot.first_name} yotube {dispatcher.bot.first_name}, yanılgı.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
