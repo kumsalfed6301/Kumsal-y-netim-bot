@@ -91,9 +91,9 @@ def ban(update: Update, context: CallbackContext) -> str:
         silent = False
     log = (
         f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#{'S' if silent else ''}ʙᴀɴɴᴇᴅ\n"
-        f"<b>ʙᴀɴɴᴇᴅ ʙʏ:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
-        f"<b>ᴜsᴇʀ:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}"
+        f"#{'S' if silent else ''}banlandı\n"
+        f"<b>yetkili:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+        f"<b>kullanıcı:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}"
     )
     if reason:
         log += "\n<b>ʀᴇᴀsᴏɴ:</b> {}".format(reason)
@@ -109,9 +109,9 @@ def ban(update: Update, context: CallbackContext) -> str:
 
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         reply = (
-            f"<code>❕</code><b>ʙᴀɴ ᴇᴠᴇɴᴛ</b>\n"
-            f"<code> </code><b>•  ʙᴀɴɴᴇᴅ ʙʏ:</b> {mention_html(user.id, user.first_name)}\n"
-            f"<code> </code><b>•  ᴜsᴇʀ:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}"
+            f"<code>❕</code><b>yeni ban</b>\n"
+            f"<code> </code><b>•  yetkili:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<code> </code><b>•  kullanıcı:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}"
         )
         if reason:
             reply += f"\n<code> </code><b>•  ʀᴇᴀsᴏɴ:</b> \n{html.escape(reason)}"
@@ -187,10 +187,10 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
 
     log = (
         f"<b>{html.escape(chat.title)}:</b>\n"
-        "ᴛᴇᴍᴩ ʙᴀɴ\n"
-        f"<b>ʙᴀɴɴᴇᴅ ʙʏ:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
-        f"<b>ᴜsᴇʀ:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}\n"
-        f"<b>ᴛɪᴍᴇ:</b> {time_val}"
+        "yeni ban\n"
+        f"<b> yetkili:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+        f"<b>kullanıcı:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}\n"
+        f"<b>tarihi:</b> {time_val}"
     )
     if reason:
         log += "\n<b>ʀᴇᴀsᴏɴ:</b> {}".format(reason)
@@ -200,8 +200,8 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         bot.sendMessage(
             chat.id,
-            f"ʙᴀɴɴᴇᴅ! ᴜsᴇʀ {mention_html(member.user.id, html.escape(member.user.first_name))} "
-            f"ɪs ɴᴏᴡ ʙᴀɴɴᴇᴅ ғᴏʀ {time_val}.",
+            f"yeni Ban {mention_html(member.user.id, html.escape(member.user.first_name))} "
+            f" banlamla zamanı {time_val}.",
             parse_mode=ParseMode.HTML,
         )
         return log
