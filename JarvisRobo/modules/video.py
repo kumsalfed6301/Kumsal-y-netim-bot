@@ -37,7 +37,7 @@ def get_text(message: Message) -> [None, str]:
         return None
 
 
-@pbot.on_message(filters.command(["vsong", "video"]))
+@pbot.on_message(filters.command(["vbul", "video"]))
 async def ytmusic(client, message: Message):
     urlissed = get_text(message)
     await message.delete()
