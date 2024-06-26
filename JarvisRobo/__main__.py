@@ -391,7 +391,7 @@ def Jarvis_about_callback(update: Update, context: CallbackContext):
              reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="🎧destek grubh🎧", callback_data="kumsalmuzikk),
+                        InlineKeyboardButton(text="🎧destek grubu🎧", callback_data="kumsalmuzikk"),
                         InlineKeyboardButton(text="🌹sahibi🌹, url=f"tg://user?id={OWNER_ID}"),
                     ],
                     [
