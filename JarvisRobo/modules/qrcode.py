@@ -22,7 +22,7 @@ sᴜᴄᴇssғᴜʟʟʏ Gᴇɴᴇʀᴀᴛᴇᴅ Qʀᴄᴏᴅᴇ 💘
 """
     await m.delete()
     await message.reply_photo(photo=write,caption=caption)
-__mod_name__ = "Qʀᴄᴏᴅᴇ"
+__mod_name__ = "🔱Qʀᴄᴏᴅᴇ🔱"
 __help__ = """
  ➻ /qrcode : ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ ǫʀᴄᴏᴅᴇ
  """
