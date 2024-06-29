@@ -1,35 +1,35 @@
-from pyrogram import filters
-import asyncio
-import pyfiglet 
-from random import choice
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
-from pyrogram.handlers import MessageHandler
-from .. import pbot as Client
+pyrogram içe aktarma filtrelerinden
+asyncio'yu içe aktar
+pyfiglet'i içe aktar 
+rastgele içe aktarma olanağından
+pyrogram.types'ten içe aktar InlineKeyboardButton, InlineKeyboardMarkup, Mesaj, CallbackQuery
+pyrogram.handler'lardan içe aktar MesajHandler 
+from .. pbot'u İstemci olarak içe aktar
 def figle(text):
-    x = pyfiglet.FigletFont.getFonts()
-    font = choice(x)
-    figled = str(pyfiglet.figlet_format(text,font=font))
-    keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="ᴄʜᴀɴɢᴇ", callback_data="figlet"),InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="close_reply")]])
-    return figled, keyboard
+x = pyfiglet.FigletFont.getFonts()
+font = seçim(x)
+figled = str(pyfiglet.figlet_format(text) ,font=font))
+klavye = InlineKeyboardMarkup([ [InlineKeyboardButton(text = "ᴄʜᴀɴɢᴇ", callback_data = "figlet"), InlineKeyboardButton (text = "ᴄʟᴏsᴇ", callback_data = "close_reply")])
+return dosyalandı, klavye
 
 @Client.on_message(filters.command("figlet"))
 async def echo(bot, message):
-    global text
-    try:
-        text = message.text.split(' ',1)[1]
-    except IndexError:
-        return await message.reply_text("Example:\n\n`/figlet Jarvis`")
-    kul_text, keyboard = figle(text)
-    await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre>", quote=True, reply_markup=keyboard)
+global text
+try:
+text = message.text.split(' ' ,1)[1]
+IndexError hariç:
+return wait message.reply_text("Örnek:\n\n`/figlet Jarvis`")
+kul_text, klavye = figle(text)
+wait message.reply_text( f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre> {kul_text</pre>", quote=True, answer_markup=keyboard)
 
 @Client.on_callback_query(filters.regex("figlet"))
-async def figlet_handler(Client, query: CallbackQuery):
-  try:
-      kul_text, keyboard = figle(text)
-      await query.message.edit_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text}</pre>", reply_markup=keyboard)
-  except Exception as e : 
-      await message.reply(e)
-__mod_name__ = "Fɪɢʟᴇᴛ" 
+async def figlet_handler(İstemci, sorgu: CallbackQuery):
+deneyin:
+kul_text, klavye = figle(metin)
+wait query.message.edit_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ғɪɢʟᴇᴛ :\n<pre>{kul_text</pre> ", answer_markup=keyboard)
+İstisna hariç e olarak: 
+wait message.reply(e)
+__mod_name__ = "🔱istisna🔱" 
 __help__="""
-❍ /figlet*:* ᴍᴀᴋᴇs ғɪɢʟᴇᴛ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ
-Example:\n\n`/figlet Jarvis`"""
+❍ /figlet*:* ᴍᴀᴋᴇs ғɪɢʟᴇᴛ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ ᴛ ᴇxᴛ 
+Örnek:\n\n` / Figlet Jarvis`"""
