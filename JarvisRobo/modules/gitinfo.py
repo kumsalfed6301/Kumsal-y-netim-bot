@@ -35,8 +35,8 @@ async def github(_, message):
             InlineKeyboardButton("Cʟᴏsᴇ",callback_data="close_reply")
             ]]     
                 caption = f"""**Iɴғᴏ Oғ {name}**
-**ᴜsᴇʀɴᴀᴍᴇ :** `{username}`
-**ʙɪᴏ :** `{bio}`
+**kullanıcı adı :** `{username}`
+**hakkında :** `{bio}`
 **ᴄᴏᴍᴘᴀɴʏ :** `{company}`
 **ᴄʀᴇᴀᴛᴇᴅ ᴏɴ:** `{created_at}`
 **ʀᴇᴘᴏsɪᴛᴏʀɪᴇs :** `{repositories}`
