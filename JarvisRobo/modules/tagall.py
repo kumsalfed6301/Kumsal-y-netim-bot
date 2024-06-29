@@ -77,9 +77,9 @@ async def cancel_spam(event):
     spam_chats.remove(event.chat_id)
     return await event.respond("Stopped mention.")
 
-__mod_name__ = "Tᴀɢᴀʟʟ"
+__mod_name__ = "🔱etiket at🔱"
 __help__ = """
 ──「  ᴏɴʟʏ ғᴏʀ ᴀᴅᴍɪɴs 」──
 
-❍ /tagall or @all '(ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ ᴏʀ ᴀᴅᴅ ᴀɴᴏᴛʜᴇʀ ᴍᴇssᴀɢᴇ) ᴛᴏ ᴍᴇɴᴛɪᴏɴ ᴀʟʟ ᴍᴇᴍʙᴇʀs ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ, ᴡɪᴛʜᴏᴜᴛ ᴇxᴄᴇᴘᴛɪᴏɴ.'
+❍ /utag or /atag '(uyeleri ve yoneticileri etiketler.'
 """
