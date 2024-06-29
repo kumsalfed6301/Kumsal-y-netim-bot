@@ -185,7 +185,7 @@ async def app_search(event):
     except Exception as err:
         await event.reply(f"Exception Occured:- {str(err)}")
 
-__mod_name__ = "Gᴏᴏɢʟᴇ"
+__mod_name__ = "🔱Gᴏᴏɢʟᴇ🔱"
 __help__ = """
  ❍ /google <text>*:* Perform a google search
  ❍ /img <text>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
