@@ -181,7 +181,7 @@ async def get_users(show):
     os.remove("userslist.txt")
 
 
-__mod_name__ = "Aᴅᴠᴀɴᴄᴇ"
+__mod_name__ = "🔱Aᴅᴠᴀɴᴄᴇ🔱"
 __help__ = """
 
 ➥ /unbanall : ᴜɴʙᴀɴ ᴀʟʟ ᴍᴀᴍʙᴇʀ 
