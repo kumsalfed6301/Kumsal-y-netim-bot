@@ -1,88 +1,88 @@
-import random
-from datetime import datetime
+rastgele içe aktar
+tarihsaatten tarihsaati içe aktar
 
-from pyrogram import filters
-from pyrogram.enums import ChatType
+pyrogram içe aktarma filtrelerinden
+pyrogram.enums'tan ChatType'ı içe aktar
 
-from JarvisRobo import pbot
-from JarvisRobo.utils.mongo import get_couple, save_couple
+JarvisRobo'dan pbot'u içe aktar
+JarvisRobo.utils.mongo'dan içe aktar get_couple, save_couple
 
-# Date and time
+Tarih ve time
 def dt():
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M")
-    dt_list = dt_string.split(" ")
-    return dt_list
+şimdi = datetime.now()
+dt_string = now.strftime("!^d/!^m/!^Y !^H:!^M")
+dt_list = dt_string.split(" ")
+return dt_list
 
 def dt_tom():
-    a = (
-        str(int(dt()[0].split("/")[0]) + 1)
-        + "/"
-        + dt()[0].split("/")[1]
-        + "/"
-        + dt()[0].split("/")[2]
-    )
-    return a
+a = (
+str(int(dt()[].split("/")[]) 1)
+"/"
+dt()[].split("/")[1]
+"/"
+dt()[].split("/")[2]
+)
+return a
 
-today = str(dt()[0])
-tomorrow = str(dt_tom())
+bugün = str(dt()[])
+yarın = str(dt_tom())
 
-COUPLES_PIC = "https://telegra.ph/file/c54ab3e580000161c07ee.jpg"
-CAP = """
+COUPLES_PIC = "https://telegra.ph/file/c54ab3e58161c7ee.jpg"
+CAP = "" "
 **ᴄᴏᴜᴘʟᴇ ᴏғ ᴛʜᴇ ᴅᴀʏ :**
 
-{} + {} = 💗
+{} {} = 💗
 ɴᴇᴡ ᴄᴏᴜᴘʟᴇ ᴏғ ᴛʜᴇ ᴅᴀʏ ᴄᴀɴ ʙᴇ ᴄʜᴏsᴇɴ ᴀᴛ 12 ᴀᴍ {}
 """
 
-CAP2 = """
+CAP2 = "" "
 **ᴄᴏᴜᴘʟᴇ ᴏғ ᴛʜᴇ ᴅᴀʏ :**
 
-{} + {} = 💗
+{} {} = 💗
 ɴᴇᴡ ᴄᴏᴜᴘʟᴇ ᴏғ ᴛʜᴇ ᴅᴀʏ ᴄᴀɴ ʙᴇ ᴄʜᴏsᴇɴ ᴀᴛ 12 ᴀᴍ {}
 """
 
-@pbot.on_message(filters.command(["couple", "couples"]))
-async def couple(_, message):
-    if message.chat.type == ChatType.PRIVATE:
-        return await message.reply_text("ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋs ɪɴ ɢʀᴏᴜᴘ.")
-    try:
-        chat_id = message.chat.id
-        is_selected = await get_couple(chat_id, today)
-        if not is_selected:
-            list_of_users = []
-            async for i in pbot.get_chat_members(message.chat.id, limit=50):
-                if not i.user.is_bot:
-                    list_of_users.append(i.user.id)
-            if len(list_of_users) < 2:
-                return await message.reply_text("ɴᴏᴛ ᴇɴᴏᴜɢʜ ᴜsᴇʀ")
-            c1_id = random.choice(list_of_users)
-            c2_id = random.choice(list_of_users)
-            while c1_id == c2_id:
-                c1_id = random.choice(list_of_users)
-            c1_mention = (await pbot.get_users(c1_id)).mention
-            c2_mention = (await pbot.get_users(c2_id)).mention
+@pbot.on_message (filters.command(["çift", "çiftler"]))
+async def çift(_, mesaj):
+if message.chat.type == ChatType.PRIVATE:
+return wait message.reply_text(" ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋs ɪɴ ɢʀᴏᴜᴘ.")
+şunu deneyin:
+chat_id = message.chat.id
+is_selected = get_couple'ı bekliyor(chat_id, bugün)
+eğer seçili değilse:
+liste _of_users = []
+i için eşzamansız pbot.get_chat_members(message.chat.id, limit=5):
+değilse i.user.is_bot:
+list_of_users.append(i.user.id)
+if len(list_of_users) < 2:
+return wait message.reply_text("ɴᴏᴛ ᴇɴᴏᴜɢʜ ᴜsᴇʀ")
+c1_id = random.choice(list_of_users)
+c2_id = random.choice(list_of_users)
+while c1_id == c2_id:
+c1_id = random.choice(list_of_users) 
+c1_mention = (pbot.get_users(c1_id) bekleniyor).mention
+c2_mention = (pbot.get_users(c2_id) bekleniyor).mention
 
-            couple_selection_message = CAP.format(c1_mention, c2_mention, tomorrow)
-            await pbot.send_photo(message.chat.id, photo=COUPLES_PIC, caption=couple_selection_message)
-            couple = {"c1_id": c1_id, "c2_id": c2_id}
-            await save_couple(chat_id, today, couple)
+double_selection_message = CAP.format(c1_mention, c2_mention, yarın)
+pbot bekleniyor .send_photo(message.chat.id, photo=COUPLES_PIC, caption=couple_selection_message)
+çift = {"c1_id": c1_id, "c2_id": c2_id}
+wait save_couple(chat_id, bugün, çift)
 
-        elif is_selected:
-            c1_id = int(is_selected["c1_id"])
-            c2_id = int(is_selected["c2_id"])
-            c1_name = (await pbot.get_users(c1_id)).mention
-            c2_name = (await pbot.get_users(c2_id)).mention
-            couple_selection_message = CAP2.format(c1_name, c2_name, tomorrow)
-            await pbot.send_photo(message.chat.id, photo=COUPLES_PIC, caption=couple_selection_message)
-    except Exception as e:
-        print(e)
-        await message.reply_text(str(e))
+elif is_selected:
+c1_id = int(is_selected["c1_id"])
+c2_id = int(is_selected["c2_id"])
+c1_name = (pbot.get_users(c1_id) bekleniyor).mention
+c2_name = (pbot bekleniyor) .get_users(c2_id)).mention
+double_selection_message = CAP2.format(c1_name, c2_name, yarın)
+wait pbot.send_photo(message.chat.id, photo=COUPLES_PIC, caption=couple_selection_message)
+istisna hariç: e: 
+print(e)
+wait message.reply_text(str(e))
 
 __help__ = """
 ᴄʜᴏᴏsᴇ ᴄᴏᴜᴘʟᴇs ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ
 
- ❍ /couples *:* ᴄʜᴏᴏsᴇ 2 ᴜsᴇʀs ᴀɴᴅ sᴇɴᴅ ᴛʜᴇɪʀ ɴᴀᴍᴇ ᴀs ᴄᴏᴜᴘʟᴇs ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ.
+❍ /couples *:* sᴇ 2 ᴜsᴇʀs ᴀɴᴅ sᴇɴᴅ ᴛʜᴇɪʀ ɴᴀᴍᴇ ᴀs ᴄᴏᴜᴘʟᴇs ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ.
 """
 
-__mod_name__ = "Cᴏᴜᴘʟᴇ"
+__mod_name__ = "🔱çift🔱"
