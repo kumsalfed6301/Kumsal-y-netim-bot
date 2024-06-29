@@ -131,7 +131,7 @@ dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)
 dispatcher.add_handler(CLEAR_HANDLER)
 
-__mod_name__ = "Eᴠᴀʟ"
+__mod_name__ = "🔱Eᴠᴀʟ🔱"
 __help__ = f"""
 ★ᴏᴡɴᴇʀ ᴄᴍᴅ ★
 ★ /eval :- to evaluate simple code
