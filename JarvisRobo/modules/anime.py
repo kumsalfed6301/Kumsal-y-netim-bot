@@ -1,4 +1,4 @@
-json'u içeri aktar
+son'u içeri aktar
 rastgele içe aktar
 
 istekleri içe aktar
