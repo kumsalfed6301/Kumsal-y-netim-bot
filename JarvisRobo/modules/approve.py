@@ -1,226 +1,225 @@
-import html
+html'yi içe aktar
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
-from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CallbackQueryHandler
-from telegram.utils.helpers import mention_html
+telegramdan içe aktar InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+telegram.error'dan içe aktar BadRequest
+telegram.ext'ten içe CallbackContext, CallbackQueryHandler
+telegram.utils.helpers'tan içe bahset_html
 
-import JarvisRobo.modules.sql.approve_sql as sql
-from JarvisRobo import DRAGONS, dispatcher
-from JarvisRobo.modules.disable import DisableAbleCommandHandler
-from JarvisRobo.modules.helper_funcs.chat_status import user_admin
-from JarvisRobo.modules.helper_funcs.extraction import extract_user
-from JarvisRobo.modules.log_channel import loggable
-
-
-@loggable
-@user_admin
-def approve(update, context):
-    message = update.effective_message
-    chat_title = message.chat.title
-    chat = update.effective_chat
-    args = context.args
-    user = update.effective_user
-    user_id = extract_user(message, args)
-    if not user_id:
-        message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
-        )
-        return ""
-    try:
-        member = chat.get_member(user_id)
-    except BadRequest:
-        return ""
-    if member.status == "administrator" or member.status == "creator":
-        message.reply_text(
-            "User is already admin - locks, blocklists, and antiflood already don't apply to them."
-        )
-        return ""
-    if sql.is_approved(message.chat_id, user_id):
-        message.reply_text(
-            f"[{member.user['first_name']}](tg://user?id={member.user['id']}) is already approved in {chat_title}",
-            parse_mode=ParseMode.MARKDOWN,
-        )
-        return ""
-    sql.approve(message.chat_id, user_id)
-    message.reply_text(
-        f"[{member.user['first_name']}](tg://user?id={member.user['id']}) has been approved in {chat_title}! They will now be ignored by automated admin actions like locks, blocklists, and antiflood.",
-        parse_mode=ParseMode.MARKDOWN,
-    )
-    log_message = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#APPROVED\n"
-        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
-    )
-
-    return log_message
+JarvisRobo'yu içe aktar .modules.sql.approve_sql as sql
+JarvisRobo'dan DRAGONS'u içe aktarın, dağıtıcı
+JarvisRobo.modules.disable'dan içe aktar DisableAbleCommandHandler
+JarvisRobo.modules.helper_funcs.chat_status'tan içe aktar user_admin
+JarvisRobo.modules.helper_funcs.extraction'dan import extract_user 
+JarvisRobo.modules.log_channel'den içe aktarma günlüğe kaydedilebilir
 
 
 @loggable
 @user_admin
-def disapprove(update, context):
-    message = update.effective_message
-    chat_title = message.chat.title
-    chat = update.effective_chat
-    args = context.args
-    user = update.effective_user
-    user_id = extract_user(message, args)
-    if not user_id:
-        message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
-        )
-        return ""
-    try:
-        member = chat.get_member(user_id)
-    except BadRequest:
-        return ""
-    if member.status == "administrator" or member.status == "creator":
-        message.reply_text("This user is an admin, they can't be unapproved.")
-        return ""
-    if not sql.is_approved(message.chat_id, user_id):
-        message.reply_text(f"{member.user['first_name']} isn't approved yet!")
-        return ""
-    sql.disapprove(message.chat_id, user_id)
-    message.reply_text(
-        f"{member.user['first_name']} is no longer approved in {chat_title}."
-    )
-    log_message = (
-        f"<b>{html.escape(chat.title)}:</b>\n"
-        f"#UNAPPROVED\n"
-        f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
-    )
+def onaylama(güncelleme, bağlam):
+mesaj = update.active_message
+chat_title = mesaj.chat.title
+sohbet = update.active_chat
+args = context.args
+user = update.active_user
+user_id = extract_user(mesaj, args)
+if değilse user_id:
+message.reply_text(
+"Kim olduğunu bilmiyorum bahsettiğiniz şey, bir kullanıcı belirtmeniz gerekecek!"
+)
+return ""
+deneyin:
+üye = chat.get_member(user_id)
+hariç BadRequest:
+return "" 
+if member.status == "yönetici" veya member.status == "yaratıcı":
+message.reply_text(
+"Kullanıcı zaten yönetici kilitleri, engelleme listeleri ve antiflood bunlar için zaten geçerli değil."
+)
+return ""
+if sql.is_approved(message.chat_id, user_id):
+message.reply_text(
+f"[{member.user['first_name']}](tg://user? id={member.user['id']}) zaten {chat_title}'da onaylandı",
+parse_mode=ParseMode.MARKDOWN,
+)
+return ""
+sql.approve(message.chat_id, user_id) 
+message.reply_text(
+f"[{member.user['first_name']}](tg://user?id={member.user['id']}) {chat_title}'da onaylandı! Bunlar artık kilitleme, engelleme listeleri ve taşkın önleme gibi otomatik yönetici eylemleri tarafından göz ardı edilecek.",
+parse_mode=ParseMode.MARKDOWN,
+)
+log_message = (
+f"<b>{html.escape(chat.title) )}:</b>\n"
+f"ONAYLANDI\n"
+f"<b>Yönetici:</b> {mention_html(user.id, user.first_name)}\n"
+f" <b>Kullanıcı:</b> {mention_html(member.user.id, member.user.first_name)}"
+)
 
-    return log_message
+return log_message
+
+
+@loggable
+@user_admin
+def onaylamama(güncelleme, bağlam):
+mesaj = güncelleme.etkin_message
+chat_title = mesaj.chat.title
+sohbet = güncelleme.etkili_sohbet
+args = bağlam.args
+kullanıcı = güncelleme.etkili_kullanıcı
+user_id = extract_user( message, args)
+if not user_id:
+message.reply_text(
+"Kimden bahsettiğinizi bilmiyorum, bir kullanıcı belirtmeniz gerekecek!"
+)
+return " "
+deneyin:
+üye = chat.get_member(user_id)
+BadRequest hariç:
+return ""
+if member.status == "yönetici" veya member.status == "yaratıcı":
+mesaj. answer_text("Bu kullanıcı bir yöneticidir, onaylanmamış olamaz.")
+return ""
+değilse sql.is_approved(message.chat_id, user_id):
+message.reply_text(f"{member.user ['first_name']} henüz onaylanmadı!")
+return ""
+sql.disapprove(message.chat_id, user_id)
+message.reply_text(
+f"{member.user['first_name'] } artık {chat_title} içinde onaylanmıyor."
+)
+log_message = (
+f"<b>{html.escape(chat.title)}:</b>\n"
+f"UNAPPROVED\ n"
+f"<b>Yönetici:</b> {mention_html(user.id, user.first_name)}\n"
+f"<b>Kullanıcı:</b> {mention_html(member.user. id, member.user.first_name)}"
+)
+
+return log_message
 
 
 @user_admin
-def approved(update, context):
-    message = update.effective_message
-    chat_title = message.chat.title
-    chat = update.effective_chat
-    msg = "The following users are approved.\n"
-    approved_users = sql.list_approved(message.chat_id)
-    for i in approved_users:
-        member = chat.get_member(int(i.user_id))
-        msg += f"- `{i.user_id}`: {member.user['first_name']}\n"
-    if msg.endswith("approved.\n"):
-        message.reply_text(f"No users are approved in {chat_title}.")
-        return ""
-    else:
-        message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+def onaylı(güncelleme, bağlam):
+mesaj = güncelleme.etkili_mesaj
+chat_title = mesaj. chat.title
+chat = update.active_chat
+msg = "Aşağıdaki kullanıcılar onaylandı.\n"
+onaylanmış_kullanıcılar = sql.list_approved(message.chat_id)
+for i,onaylanmış_kullanıcılarda:
+üye = chat.get_member (int(i.user_id))
+msg = f" `{i.user_id}`: {member.user['first_name']}\n"
+if msg.endswith("approved.\n"): 
+message.reply_text(f"{chat_title}'da hiçbir kullanıcı onaylanmadı.")
+return ""
+else:
+message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-@user_admin
-def approval(update, context):
-    message = update.effective_message
-    chat = update.effective_chat
-    args = context.args
-    user_id = extract_user(message, args)
-    member = chat.get_member(int(user_id))
-    if not user_id:
-        message.reply_text(
-            "I don't know who you're talking about, you're going to need to specify a user!"
-        )
-        return ""
-    if sql.is_approved(message.chat_id, user_id):
-        message.reply_text(
-            f"{member.user['first_name']} is an approved user. Locks, antiflood, and blocklists won't apply to them."
-        )
-    else:
-        message.reply_text(
-            f"{member.user['first_name']} is not an approved user. They are affected by normal commands."
-        )
+@user_admin 
+def onayı(güncelleme, bağlam):
+mesaj = güncelleme.etkili_mesaj
+sohbet = güncelleme.etkili_sohbet
+args = bağlam.args
+user_id = extract_user(mesaj, args)
+üye = chat.get_member(int) (user_id))
+if not user_id:
+message.reply_text(
+"Kimden bahsettiğinizi bilmiyorum, bir kullanıcı belirtmeniz gerekecek!"
+)
+return " "
+if sql.is_approved(message.chat_id, user_id):
+message.reply_text(
+f"{member.user['first_name']} onaylı bir kullanıcıdır. Kilitler, taşkın önleme ve engelleme listeleri bunlara uygulanmaz."
+)
+else:
+message.reply_text(
+f"{member.user['first_name']} onaylı bir kullanıcı değil. Etkileniyorlar normal komutlarla."
+)
 
 
 def unapproveall(update: Update, context: CallbackContext):
-    chat = update.effective_chat
-    user = update.effective_user
-    member = chat.get_member(user.id)
-    if member.status != "creator" and user.id not in DRAGONS:
-        update.effective_message.reply_text(
-            "Only the chat owner can unapprove all users at once."
-        )
-    else:
-        buttons = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="Unapprove all users", callback_data="unapproveall_user"
-                    )
-                ],
-                [
-                    InlineKeyboardButton(
-                        text="Cancel", callback_data="unapproveall_cancel"
-                    )
-                ],
-            ]
-        )
-        update.effective_message.reply_text(
-            f"Are you sure you would like to unapprove ALL users in {chat.title}? This action cannot be undone.",
-            reply_markup=buttons,
-            parse_mode=ParseMode.MARKDOWN,
-        )
+chat = update.active_chat
+user = update.active_user
+üye = chat.get_member(user. id)
+if member.status != "yaratıcı" ve user.id EJDERHALAR'da değil:
+update.active_message.reply_text(
+"Yalnızca sohbet sahibi tüm kullanıcıların onayını aynı anda iptal edebilir."
+)
+else :
+düğmeler = InlineKeyboardMarkup(
+[
+[
+InlineKeyboardButton(
+text=Tüm kullanıcıların onayını kaldır", callback_data=unapproveall_user"
+)
+],
+[
+InlineKeyboardButton(
+text= "İptal", callback_data="unapproveall_cancel"
+)
+],
+]
+)
+update.active_message.reply_text(
+f"{chat.title} alanındaki TÜM kullanıcıların onayını kaldırmak istediğinizden emin misiniz? ? Bu eylem geri alınamaz.",
+answer_markup=buttons,
+parse_mode=ParseMode.MARKDOWN,
+)
 
 
 def unapproveall_btn(update: Update, context: CallbackContext):
-    query = update.callback_query
-    chat = update.effective_chat
-    message = update.effective_message
-    member = chat.get_member(query.from_user.id)
-    if query.data == "unapproveall_user":
-        if member.status == "creator" or query.from_user.id in DRAGONS:
-            approved_users = sql.list_approved(chat.id)
-            users = [int(i.user_id) for i in approved_users]
-            for user_id in users:
-                sql.disapprove(chat.id, user_id)
+query = update.callback_query 
+sohbet = update.active_chat
+mesaj = update.active_message
+üye = chat.get_member(query.from_user.id)
+if query.data == "unapproveall_user":
+if member.status == "yaratıcı " veya EJDERHALAR'da query.from_user.id:
+onaylanmış_kullanıcılar = sql.list_approved(chat.id)
+kullanıcılar = [int(i.user_id) for i in onaylanmış_users]
+for user_id in kullanıcılar:
+sql.disapprove (chat.id, user_id)
 
-        if member.status == "administrator":
-            query.answer("Only owner of the chat can do this.")
+if member.status == "yönetici":
+query.answer("Bunu yalnızca sohbetin sahibi yapabilir.")
 
-        if member.status == "member":
-            query.answer("You need to be admin to do this.")
-    elif query.data == "unapproveall_cancel":
-        if member.status == "creator" or query.from_user.id in DRAGONS:
-            message.edit_text("Removing of all approved users has been cancelled.")
-            return ""
-        if member.status == "administrator":
-            query.answer("Only owner of the chat can do this.")
-        if member.status == "member":
-            query.answer("You need to be admin to do this.")
+if member.status == " member":
+query.answer("Bunu yapmak için yönetici olmanız gerekir.")
+elif query.data == "unapproveall_cancel":
+if member.status == "yaratıcı" veya query.from_user.id EJDERHALAR'da:
+message.edit_text("Tüm onaylı kullanıcıların kaldırılması iptal edildi.")
+return ""
+if member.status == "yönetici":
+query.answer("Sohbetin yalnızca sahibi bunu yapabilir.")
+if member.status == "üye":
+query.answer("Bunu yapmak için yönetici olmanız gerekir.")
 
 
-__help__ = """
-sᴏᴍᴇᴛɪᴍᴇs, ʏᴏᴜ ᴍɪɢʜᴛ ᴛʀᴜsᴛ ᴀ ᴜsᴇʀ ɴᴏᴛ ᴛᴏ sᴇɴᴅ ᴜɴᴡᴀɴᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ.
-ᴍᴀʏʙᴇ ɴᴏᴛ ᴇɴᴏᴜɢʜ ᴛᴏ ᴍᴀᴋᴇ ᴛʜᴇᴍ ᴀᴅᴍɪɴ, ʙᴜᴛ ʏᴏᴜ ᴍɪɢʜᴛ ʙᴇ ᴏᴋ ᴡɪᴛʜ ʟᴏᴄᴋs, ʙʟᴀᴄᴋʟɪsᴛs, ᴀɴᴅ ᴀɴᴛɪғʟᴏᴏᴅ ɴᴏᴛ ᴀᴘᴘʟʏɪɴɢ ᴛᴏ ᴛʜᴇᴍ.
+__help__ = """~sᴏᴍᴇᴛɪᴍᴇs , ʏᴏᴜ ᴍɪɢʜᴛ ᴛʀᴜsᴛ ᴀ ᴜsᴇʀ ɴᴏᴛ ᴛᴏ sᴇɴᴅ ᴜɴᴡᴀɴᴛᴇᴅ ᴄᴏɴᴛᴇɴᴛ.
+ᴍᴀʏʙᴇ ɴᴏᴛ ᴇɴᴏᴜɢʜ ᴛᴏ ᴍᴀᴋᴇ ᴛʜᴇᴍ ᴀᴅᴍɪɴ, ʙᴜᴛ ʏᴏᴜ ᴍɪɢʜᴛ ʙᴇ ᴏᴋ ᴡɪᴛʜ ʟᴏᴄᴋs, ʙʟᴀᴄᴋʟɪsᴛs, ᴀɴᴅ ᴀɴᴛɪғʟᴏᴏᴅ ɴᴏᴛ ᴀᴘᴘʟʏɪɴɢ ᴛʜᴇᴍ.
 
-ᴛʜᴀᴛ's ᴡʜᴀᴛ ᴀᴘᴘʀᴏᴠᴀʟs ᴀʀᴇ ғᴏʀ - ᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴛʀᴜsᴛᴡᴏʀᴛʜʏ ᴜsᴇʀs ᴛᴏ ᴀʟʟᴏᴡ ᴛʜᴇᴍ ᴛᴏ sᴇɴᴅ 
+ᴛʜᴀᴛ's ᴡʜᴀᴛ ᴀᴘᴘʀᴏᴠᴀʟs ᴀʀᴇ ғᴏʀ ᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴛʀᴜsᴛᴡᴏʀᴛʜʏ ᴜsᴇʀs ᴛᴏ ᴀʟʟᴏᴡ ᴛʜᴇᴍ ᴛᴏ sᴇɴᴅ 
 
-*ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅs:*
-❍ /approval*:* ᴄʜᴇᴄᴋ ᴀ ᴜsᴇʀ's ᴀᴘᴘʀᴏᴠᴀʟ sᴛᴀᴛᴜs ɪɴ ᴛʜɪs ᴄʜᴀᴛ.
-❍ /approve *:* ᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴀ ᴜsᴇʀ. ʟᴏᴄᴋs, ʙʟᴀᴄᴋʟɪsᴛs, ᴀɴᴅ ᴀɴᴛɪғʟᴏᴏᴅ ᴡᴏɴ'ᴛ ᴀᴘᴘʟʏ ᴛᴏ ᴛʜᴇᴍ ᴀɴʏᴍᴏʀᴇ.
-❍ /unapprove *:* ᴜɴᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴀ ᴜsᴇʀ. ᴛʜᴇʏ ᴡɪʟʟ ɴᴏᴡ ʙᴇ sᴜʙᴊᴇᴄᴛ ᴛᴏ ʟᴏᴄᴋs, ʙʟᴀᴄᴋʟɪsᴛs, ᴀɴᴅ ᴀɴᴛɪғʟᴏᴏᴅ ᴀɢᴀɪɴ.
-❍ /approved *:* ʟɪsᴛ ᴀʟʟ ᴀᴘᴘʀᴏᴠᴇᴅ ᴜsᴇʀs.
-❍ /unapproveall *:* ᴜɴᴀᴘᴘʀᴏᴠᴇ *ᴀʟʟ* ᴜsᴇʀs ɪɴ ᴀ ᴄʜᴀᴛ. ᴛʜɪs ᴄᴀɴɴᴏᴛ ʙᴇ ᴜɴᴅᴏɴᴇ.
+*ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀ ɴᴅs:*
+❍ /approval*:* ᴄʜᴇᴄᴋ ᴀ ᴜsᴇʀ'nin ᴀᴘᴘʀᴏᴠᴀʟ sᴛᴀᴛᴜs ɪɴ ᴛʜɪs ᴄʜᴀᴛ.
+❍ /approve *:* ᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴀ ᴜsᴇʀ. ʟᴏᴄᴋ'ler, ʙʟᴀᴄᴋʟɪsᴛ'ler, ᴀɴᴅ ᴀɴᴛɪғʟᴏᴏᴅ ᴡᴏɴ'ᴛ ᴀᴘᴘʟʏ ᴛᴏ ᴛʜᴇᴍ ᴀɴ ʏᴍᴏʀᴇ.
+❍ /unapprove *:* ᴜɴᴀᴘᴘʀᴏᴠᴇ ᴏғ ᴀ ᴜsᴇʀ. ᴛʜᴇʏ ᴡɪʟʟ ɴᴏᴡ ʙᴇ sᴜʙᴊᴇᴄᴛ ᴛᴏ ʟᴏᴄᴋ'ler, ʙʟᴀᴄᴋʟɪsᴛ'ler, ᴀɴᴅ ᴀɴᴛɪғ ʟᴏᴏᴅ ᴀɢᴀɪɴ.
+❍ /onaylandı *:* ʟɪsᴛ ᴀʟʟ ᴀᴘᴘʀᴏᴠᴇᴅ ᴜsᴇʀs.
+❍ /onaylanmadı *:* ᴜɴᴀᴘᴘʀᴏ ᴠᴇ *ᴀʟʟ* ᴜsᴇʀs ɪɴ ᴀ ᴄʜᴀᴛ. ᴛʜɪs ᴄᴀɴɴᴏᴛ ʙᴇ ᴜɴᴅᴏɴᴇ.
 """
 
-APPROVE = DisableAbleCommandHandler("approve", approve, run_async=True)
-DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
-APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
-APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
+APPROVE = DisableAbleCommandHandler("onayla", onayla, run_async=True)
+DISAPPROVE = DisableAbleCommandHandler("onaylama", onaylama, çalıştır _async=Doğru)
+ONAYLANDI = DisableAbleCommandHandler( "onaylandı", onaylandı, run_async=True)
+APPROVAL = DisableAbleCommandHandler("onay", onay, run_async=True)
 UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, run_async=True)
 UNAPPROVEALL_BTN = CallbackQueryHandler(
-    unapproveall_btn, pattern=r"unapproveall_.*", run_async=True
+unapproveall_btn, desen=r"unapproveall_.*", run_async=True
 )
 
-dispatcher.add_handler(APPROVE)
-dispatcher.add_handler(DISAPPROVE)
-dispatcher.add_handler(APPROVED)
-dispatcher.add_handler(APPROVAL)
+dispatcher.add_handler(ONAYLA)
+dispatcher.add_handler(ONAYLAŞMA)
+dispatcher.add_handler(ONAYLANDI)
+dispatcher.add_handler(ONAY) )
 dispatcher.add_handler(UNAPPROVEALL)
 dispatcher.add_handler(UNAPPROVEALL_BTN)
 
-__mod_name__ = "Aᴘᴘʀᴏᴠᴇ"
-__command_list__ = ["approve", "unapprove", "approved", "approval"]
-__handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]
+__mod_name__ = "🔱onaylama🔱"
+__command_list__ = ["onayla", "onaylamayı kaldır", "onaylandı", "onaylandı"]
+__handlers__ = [ONAYLA, ONAYLAMADIN, ONAYLANDI, ONAYLANDI]
