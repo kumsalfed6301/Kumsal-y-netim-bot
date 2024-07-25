@@ -1,4 +1,4 @@
-İmport json
+import json
 import random
 
 import requests
